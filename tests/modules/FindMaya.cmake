@@ -66,7 +66,12 @@ endif()
 set(MAYA_INSTALL_BASE_PATH ${MAYA_INSTALL_BASE_DEFAULT} CACHE STRING
     "Root path containing your maya installations, e.g. /usr/autodesk or /Applications/Autodesk/")
 
-set(MAYA_LOCATION ${MAYA_INSTALL_BASE_PATH}/maya${MAYA_VERSION}${MAYA_INSTALL_BASE_SUFFIX})
+if (MAYA_LOCATION)
+    MESSAGE(STATUS "Using given Maya, ${MAYA_LOCATION}")
+else()    
+    set(MAYA_LOCATION ${MAYA_INSTALL_BASE_PATH}/maya${MAYA_VERSION}${MAYA_INSTALL_BASE_SUFFIX})
+    MESSAGE(STATUS "No Maya Location defined, using ${MAYA_LOCATION}")
+endif()
 
 # Maya library directory
 find_path(MAYA_LIBRARY_DIR ${OPENMAYA}
